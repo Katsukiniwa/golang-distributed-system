@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-  "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 )
 
 func NewHTTPServer(addr string) *http.Server {
@@ -12,9 +12,9 @@ func NewHTTPServer(addr string) *http.Server {
 	r := mux.NewRouter()
 	r.HandleFunc("/", httpsrv.handleProduce).Methods("POST")
 	r.HandleFunc("/", httpsrv.handleConsume).Methods("GET")
-	
+
 	return &http.Server{
-		Addr: addr,
+		Addr:    addr,
 		Handler: r,
 	}
 }
@@ -91,7 +91,7 @@ func (s *httpServer) handleConsume(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	res := CosumeResponse {
+	res := CosumeResponse{
 		Record: record,
 	}
 	err = json.NewEncoder(w).Encode(res)
